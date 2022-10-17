@@ -1,0 +1,232 @@
+ 
+
+
+
+
+
+Dimension d = new Dimension(420,600);
+		//Resize the current window to the given dimension
+		driver.manage().window().setSize(d);
+
+
+Point p = new Point(0,3000);
+
+
+Point point = element.getLocation();
+int xcord = point.getX();
+System.out.println("Position of the webelement from left side is "+xcord +" pixels");
+int ycord = point.getY();
+System.out.println("Position of the webelement from top side is "+ycord +" pixels");
+
+
+
+
+
+The resolution of the image file is measured using pixel value.
+
+getsize() will capture the size of the window.
+
+
+
+
+ToolTip
+
+String tooltipText = ageTextBox.getAttribute("title"); 
+		
+		System.out.println("Retrieved tooltip text as :"+tooltipText); 
+		
+		//Verification if tooltip text is matching expected value 
+if(tooltipText.equalsIgnoreCase("We ask for your age only for statistical purposes."))
+
+{ 
+System.out.println("Pass : Tooltip matching expected value");
+}
+		
+else
+{ 
+System.out.println("Fail : Tooltip NOT matching expected value"); 
+} 
+To perform some complex events like mouse hower, right-click, double -click on element
+
+
+Action class can be used to perform complex events.
+
+
+Action act=new Action(parameter);
+
+perform() method is used to execute an action.
+
+
+Drag and Drop
+
+
+Actions builder = new Actions(driver);
+		 
+		WebElement from = driver.findElement(By.id("draggable"));
+		 
+		WebElement to = driver.findElement(By.id("droppable"));	 
+		//Perform drag and drop
+		builder.dragAndDrop(from, to).perform();
+		
+		//verify text changed in to 'Drop here' box 
+		String textTo = to.getText();
+
+		if(textTo.equals("Dropped!")) {
+			System.out.println("PASS: Source is dropped to target as expected");
+		}else {
+			System.out.println("FAIL: Source couldn't be dropped to target as expected");
+		}
+	
+
+
+
+
+Drag and drop using offset
+
+Actions builder = new Actions(driver);
+		 
+		WebElement from = driver.findElement(By.id("draggable"));
+		 
+		WebElement to = driver.findElement(By.id("droppable"));	 
+		
+		//Here, getting x and y offset to drop source object on target object location
+		//First, get x and y offset for from object
+		int xOffset1 = from.getLocation().getX();
+		
+		int yOffset1 =  from.getLocation().getY();
+		
+		System.out.println("xOffset1--->"+xOffset1+" yOffset1--->"+yOffset1);
+		
+		//Secondly, get x and y offset for to object
+		int xOffset = to.getLocation().getX();
+				
+		int yOffset =  to.getLocation().getY();
+		
+		System.out.println("xOffset--->"+xOffset+" yOffset--->"+yOffset);
+		
+		//Find the xOffset and yOffset difference to find x and y offset needed in which from object required to dragged and dropped
+		xOffset =(xOffset-xOffset1)+10;
+		yOffset=(yOffset-yOffset1)+20;
+		
+
+		//Perform dragAndDropBy 
+		builder.dragAndDropBy(from, xOffset,yOffset).perform();
+		
+		//verify text changed in to 'Drop here' box 
+		//Get text value of 'to' element
+		String textTo = to.getText(); 
+
+		if(textTo.equals("Dropped!")) {
+			System.out.println("PASS: Source is dropped at location as expected");
+		}else {
+			System.out.println("FAIL: Source couldn't be dropped at location as expected");
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+driver.get("https://demoqa.com/buttons");
+	   System.out.println("demoqa webpage displayed");
+		
+	   //Maximise browser window
+	   driver.manage().window().maximize();
+		 
+	   //Instantiate Action Class
+	   Actions actions = new Actions(driver);
+		 
+	   //Retrieve WebElement to perform right click
+	   WebElement btnElement = driver.findElement(By.id("rightClickBtn"));
+		 
+	   //Right Click the button to display Context Menu&nbsp;
+	   actions.contextClick(btnElement).perform();
+	   System.out.println("Right click Context Menu displayed");
+		 
+	   //Following code is to select item from context menu which gets open up on right click, this differs 
+	   //depending upon your application specific test case: 
+	   //Select and click 'Copy me' i.e. 2nd option in Context menu 
+	   WebElement elementOpen = driver.findElement(By.xpath(".//div[@id='rightclickItem']/div[1]"));  
+	   elementOpen.click(); 
+		 
+	   // Accept the Alert 
+	   driver.switchTo().alert().accept();
+	   System.out.println("Right click Alert Accepted");
+		 
+	   // Close the main window 
+	   driver.close();
+
+
+
+
+
+driver.get("https://demoqa.com/buttons"); 
+	System.out.println("Demoqa Web Page Displayed"); 
+	
+	//Maximise browser window 
+	driver.manage().window().maximize(); 
+	
+	//Instantiate Action Class 
+	Actions actions = new Actions(driver); 
+	
+	//Retrieve WebElement to perform double click WebElement
+	btnElement = driver.findElement(By.id("doubleClickBtn")); 
+	
+	//Double Click the button 
+	actions.doubleClick(btnElement).perform(); 
+	
+	System.out.println("Button is double clicked"); 
+	
+	//Following code just click on OK button on alert , this differs 
+	//depending upon application(under test) specific test case  
+	// Accept the Alert  
+	driver.switchTo().alert().accept(); 
+	System.out.println("Double click Alert Accepted"); 
+	
+	//Close the main window 
+	driver.close();	 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
